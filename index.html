@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Google Map</title>
+
+    <style>
+        #map {
+            height: 400px;
+            width: 100%;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <h1>My Google Map</h1>
+
+    <div id="map"></div>
+
+    <script>
+        function initMap() {
+            // Map options
+            var options = {
+                zoom: 8,
+                center: { lat: -32.2968, lng: 26.4194 }
+            }
+
+            // New map
+            var map = new google.maps.Map(document.getElementById('map'), options);
+
+            /*
+            // Listen for click on map
+            google.maps.event.addListener(map, 'click', function (event) {
+                // Add marker
+                addMarker({ coords: event.latLng });
+            })
+            */
+
+            /*
+            // Add marker
+            var marker = new google.maps.Marker({
+                position: { lat: -32.7663, lng: 26.6200 },
+                map: map,
+                icon: 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png'
+            });
+
+            var infoWindow = new google.maps.InfoWindow({
+                content: '<h1>Fort Beaufort, EC</h1>'
+            });
+
+            marker.addListener('click', function () {
+                infoWindow.open(map, marker);
+            });
+            */
+
+            // Array of markers
+            var markers = [
+                {
+                    coords: { lat: -32.7663, lng: 26.6200 },
+                    IconImage: 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
+                    content: '<h1>Fort Beaufort, EC</h1>'
+                },
+
+                {
+                    coords: { lat: -33.0292, lng: 27.8546 },
+                    content: '<h1>East London, EC</h1>'
+                },
+
+                {
+                    coords: { lat: -32.1810, lng: 25.6510 },
+                    content: '<h1>Cradock, EC</h1>'
+                }
+
+            ];
+
+            // Loop through markers
+            for (var i = 0; i < markers.length; i++) {
+                // Add marker
+                addMarker(markers[i]);
+            }
+
+            // Add Marker Function
+            function addMarker(props) {
+                var marker = new google.maps.Marker({
+                    position: props.coords,
+                    map: map,
+                    //icon: props.IconImage
+                });
+
+                // Check for custom icon
+                if (props.IconImage) {
+                    // Set icon image
+                    marker.setIcon(props.IconImage);
+                }
+
+                // Check content
+                if (props.content) {
+                    var infoWindow = new google.maps.InfoWindow({
+                        content: props.content
+                    });
+
+                    marker.addListener('click', function () {
+                        infoWindow.open(map, marker);
+                    });
+                }
+            }
+        }
+    </script>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAO-CAqN8i_047ntbz3awWyy35ZjTkYUdU&callback=initMap"
+        async defer></script>
+
+</body>
+
+</html>
